@@ -1,6 +1,4 @@
-from lib2to3.pytree import Base
-from typing import Any
-from matrix import Matrix
+from matrix import Matrix, Vector
 
 def print_matrix(matrix):
     print(matrix.shape)
@@ -23,19 +21,8 @@ if __name__ == "__main__":
     matrix2 = Matrix([[5, 1], [2, 3], [3, 4]])
     #print_matrix(matrix1)
     #print_matrix(matrix2)
-    print_matrix(matrix1 * matrix2)
-    print_matrix(matrix1 * matrix2)
 
-    print_matrix(3 * matrix1)
-
-    m1 = Matrix([[0.0, 1.0, 2.0, 3.0],
-    [0.0, 2.0, 4.0, 6.0]])
-    m2 = Matrix([[0.0, 1.0],
-    [2.0, 3.0],
-    [4.0, 5.0],
-    [6.0, 7.0]])
-    print(m1 * m2)
-    print("---")
-    print(m1)
-    print("---")
-    print(Matrix([[1, 2, 5], [2, 4, 6]]).T())
+    v = Vector([[1], [2], [3]])
+    m1 = Matrix([[0.0, 1.0, 2.0],
+[0.0, 2.0, 4.0]])
+    print(m1 * v)
