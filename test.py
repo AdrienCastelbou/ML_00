@@ -86,7 +86,7 @@ def matrix_substraction_test():
 
 
 def matrix_div_test():
-    print("<*** Division test")
+    print("<*** Division test ***>")
     print("- Division by scalar")
     matrix1 = Matrix([[1.0, 13, 11], [3.0, 4.0, 89]])
     print(f"{matrix1} / {3} = {matrix1 / 3}")
@@ -103,12 +103,44 @@ def matrix_div_test():
         print(err)
 
 
-
+def matrix_mul_test():
+    print("<** Multiplication Tests ***>")
+    print("Multiplication by Matrix")
+    matrix1 = Matrix([[0.0, 1.0, 2.0, 3.0],
+             [0.0, 2.0, 4.0, 6.0]])
+    matrix2 = Matrix([[0.0, 1.0],
+             [2.0, 3.0],
+             [4.0, 5.0],
+             [6.0, 7.0]])
+    print(f"{matrix1} * {matrix2} = {matrix1 * matrix2}")
+    matrix1 = Matrix([[1, 2.0, 3.0],
+             [4.0, 5.0, 6.0]])
+    matrix2 = Matrix([[7.0, 8.0],
+             [9.0, -1],
+             [-2, -3]])
+    print(f"{matrix1} * {matrix2} = {matrix1 * matrix2}") 
+    matrix2 = Matrix((3, 2))
+    print(f"{matrix1} * {matrix2} = {matrix1 * matrix2}")
+    print("- Multiplication by scalar")
+    matrix1 = Matrix([[1.0, 13, 11], [3.0, 4.0, 89]])
+    print(f"{matrix1} * {3} = {matrix1 * 3}")
+    print(f"{matrix1} * {2.5} = {matrix1 * 2.5}")
+    print("- Bad Inputs")
+    matrix2 = Matrix([[1.0, 13, 11], [3.0, 4.0, 89]])
+    try:
+        print(f"{matrix1} / {matrix2} = {matrix1 / matrix2}")
+    except Exception as err:
+        print(err)
+    try:
+        print(f"{3} / {matrix2} = {3 / matrix2}")
+    except Exception as err:
+        print(err)
 def main():
     #matrix_creation_test()
     #matrix_addition_test()
     #matrix_substraction_test()
-    matrix_div_test()
+    #matrix_div_test()
+    matrix_mul_test()
 
 
 if __name__ == "__main__":

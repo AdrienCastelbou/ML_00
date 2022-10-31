@@ -94,32 +94,40 @@ class Matrix:
         raise NotImplementedError(f"cannot div a {type(scalar)} by a Matrix")
 
     def __mul__(self, other):
-        print(type(self))
+        if (not isinstance(other, (Matrix, Vector, int, float))):
+            raise NotImplementedError(f"cannot div a {type(other)} by a Matrix")
         if type(other) == Vector and (self.shape[1] != other.shape[0] and self.shape[1] != other.shape[1]):
             raise ValueError(f"cannot mul two incompatible matrices and vector")
         elif type(other) == Matrix and (self.shape[0] != other.shape[1] or self.shape[1] != other.shape[0]):
             raise ValueError(f"cannot mul two incompatible matrices")
+        if type(other) == Vector and self.shape[1] != other.shape[0]:
+                other = other.T()
         res: list = []
-        if type(other) == Matrix or type(other) == Vector:
+        if (isinstance(other, (Matrix, Vector))):
             if type(other) == Vector and self.shape[1] != other.shape[0]:
                 other = other.T()
-            print(other.shape)
-            for i in range(0, self.shape[0]):
-                res.append([0] * other.shape[1])
-                for j in range(0, other.shape[1]):
-                    for k in range(0, self.shape[1]):
-                        res[i][j] = res[i][j] + self.data[i][k] * other.data[k][j]
-        elif type(other) == int or type(other) == float:
-            for i in range(0, self.shape[0]):
-                row: list = [] 
-                for j in range(0, self.shape[1]):
-                    row.append(self.data[i][j] * other)
-                res.append(row)
-        return type(self)(res)
-                   
+            try:
+                res = type(self)((self.shape[0], other.shape[1]))
+                for i in range(0, self.shape[0]):
+                    for j in range(0, other.shape[1]):
+                        for k in range(0, self.shape[1]):
+                            res.data[i][j] += self.data[i][k] * other.data[k][j]
+                return res
+            except:
+                raise ValueError("Error encountered")  
+        elif (isinstance(other, (int, float))):
+            try:
+                res = type(self)(self.shape)
+                for i in range(0, self.shape[0]):
+                    for j in range(0, self.shape[1]):
+                        res.data[i][j] = self.data[i][j] * other
+                return res
+            except:
+                raise ValueError("Error encountered")               
 
     def __rmul__(self, other):
-        return self * other
+        if (isinstance(other, (int, float))):
+            return self * other
 
     def __str__(self) -> str:
         return str(self.data)
