@@ -58,10 +58,37 @@ def matrix_addition_test():
     except Exception as err:
         print(err)
 
+def matrix_substraction_test():
+    print("<*** Substraction tests ***>")
+    print("- Substractions between matrices")
+    matrix1 = Matrix([[1.0, 13, 11], [3.0, 4.0, 89]])
+    matrix2 = Matrix([[1.0, 13, 11], [3.0, 4.0, 89]])
+    print(f"{matrix1} - {matrix2} = {matrix1 - matrix2}")
+    matrix2 = Matrix((2, 3))
+    print(f"{matrix1} - {matrix2} = {matrix1 - matrix2}")
+    matrix1 = Matrix([[11.0, 130, -11], [3.0, 4.0, 89]])
+    matrix2 = Matrix([[-331.0, -13, -11], [3.44, 401, 89]])
+    print(f"{matrix1} - {matrix2} = {matrix1 - matrix2}")
+    print("- Bad inputs")
+    try:
+        print(f"{matrix1} - {2} = {matrix1 - 2}")
+    except Exception as err:
+        print(err)
+    try:
+        print(f"{2} - {matrix2} = {2 - matrix2}")
+    except Exception as err:
+        print(err)
+    try:
+        matrix2 = Matrix((2, 4))
+        print(f"{matrix1} + {matrix2} = {matrix1 + matrix2}")
+    except Exception as err:
+        print(err)
 
 def main():
     #matrix_creation_test()
-    matrix_addition_test()
+    #matrix_addition_test()
+    matrix_substraction_test()
+
 
 if __name__ == "__main__":
     main()
