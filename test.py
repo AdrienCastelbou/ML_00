@@ -1,11 +1,44 @@
 from matrix import Matrix, Vector
 
-def print_matrix(matrix):
-    print(matrix.shape)
-    for r in matrix.data:
-        print(r)
+
+def matrix_creation_test():
+    print("<*** Basic Matrix Creation ***>")
+    print("- Create a Matrix using data")
+    print("Use [[1.0, 13, 11], [3.0, 4.0, 89]]")
+    print(f"Output: {Matrix([[1.0, 13, 11], [3.0, 4.0, 89]])}")
+    print("- Create a Matrix using shape")
+    print("Use (2, 3)")
+    print(f"Output: {Matrix((2, 3))}")
+    print("- Using Wrong Inputs")
+    try:
+        Matrix([["1.0", 13, 11], [3.0, 4.0, 89]])
+    except Exception as err:
+        print(err)
+    try:
+        Matrix([[1.0, 10, 13, 11], [3.0, 4.0, 89]])
+    except Exception as err:
+        print(err)
+    try:
+        Matrix((2))
+    except Exception as err:
+        print(err)
+    try:
+        Matrix((0, 1))
+    except Exception as err:
+        print(err)
+    try:
+        Matrix((0, "1"))
+    except Exception as err:
+        print(err)
+    print("<*** End of Basics Tests")
+
+
+def main():
+    matrix_creation_test()
 
 if __name__ == "__main__":
+    main()
+
 #    matrix1 = Matrix([[1.0, 13, 11], [3.0, 4.0, 89]])
 #    print_matrix(matrix1)
 #    matrix2 = Matrix((2, 3))

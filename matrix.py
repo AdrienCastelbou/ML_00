@@ -1,22 +1,35 @@
 class Matrix:
-    data: list[list] = []
-    shape: tuple[int, int] = 0
+    data= None
+    shape = None
 
 
     def __init__(self, arg) -> None:
-        if isinstance(arg, list) and isinstance(arg[0], list):
+        self.check_arg(arg)
+        if isinstance(arg, list):
             self.data = arg
-            l = len(arg[0])
-            for row in arg:
-                if l != len(row):
-                    raise ValueError(f"cannot build a Matrice : all rows must have the same len")
             self.shape = (len(self.data), len(self.data[0]))
-        elif isinstance(arg, tuple) and isinstance(arg[0], int) and isinstance(arg[1], int):
+        else:
             self.shape = arg
+            self.data = []
             for i in range(0, self.shape[0]):
                 self.data.append([0] * self.shape[1])
-        else:
+
+    def check_arg(self, arg):
+        if not isinstance(arg, (list, tuple)):
             raise ValueError(f"unsupported argument format: {arg}")
+        if isinstance(arg, list):
+            l = len(arg[0])
+            for row in arg:
+                if not isinstance(row, list) or l != len(row) or not all(isinstance(elem, (int, float)) for elem in row):
+                    raise ValueError(f"unsupported argument format: {arg}")
+        else:
+            if len(arg) != 2:
+                raise ValueError(f"unsupported argument format: {arg}")
+            elif not isinstance(arg[0], (int, float)) or not isinstance(arg[1],(int, float)):
+                raise ValueError(f"unsupported argument format: {arg}")
+            elif arg[0] <= 0 or arg[1] <= 0:
+                raise ValueError(f"unsupported argument format: {arg}")
+
 
     def __add__(self, other):
         if not isinstance(other, Matrix):
