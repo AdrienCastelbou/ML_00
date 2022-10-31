@@ -77,21 +77,21 @@ class Matrix:
             raise ValueError("Error encountered")
 
     def __truediv__(self, scalar):
-        if type(scalar) != int and type(scalar) != float:
+        if not isinstance(scalar, (int, float)):
             raise NotImplementedError(f"cannot div a Matrix by a {type(scalar)}")
         elif scalar == 0:
             raise ZeroDivisionError(f"cannot div a Matrix by 0")
-        res: list = []
-        for i in range(0, self.shape[0]):
-            row: list = [] 
-            for j in range(0, self.shape[1]):
-                row.append(self.data[i][j] / scalar)
-            res.append(row)
-        return type(self)(res)
+        try:
+            res = type(self)(self.shape)
+            for i in range(0, self.shape[0]):
+                for j in range(0, self.shape[1]):
+                    res.data[i][j] = self.data[i][j] / scalar
+            return res
+        except:
+            raise ValueError("Error encountered")
     
     def __rtruediv__(self, scalar):
-        return self / scalar
-
+        raise NotImplementedError(f"cannot div a {type(scalar)} by a Matrix")
 
     def __mul__(self, other):
         print(type(self))
