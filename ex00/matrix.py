@@ -95,17 +95,15 @@ class Matrix:
 
     def __mul__(self, other):
         if (not isinstance(other, (Matrix, Vector, int, float))):
-            raise NotImplementedError(f"cannot div a {type(other)} by a Matrix")
-        if type(other) == Vector and (self.shape[1] != other.shape[0] and self.shape[1] != other.shape[1]):
+            raise NotImplementedError(f"cannot mul a {type(other)} and a Matrix")
+        if type(other) == Vector and self.shape[1] != other.shape[0]:
             raise ValueError(f"cannot mul two incompatible matrices and vector")
         elif type(other) == Matrix and (self.shape[0] != other.shape[1] or self.shape[1] != other.shape[0]):
             raise ValueError(f"cannot mul two incompatible matrices")
         if type(other) == Vector and self.shape[1] != other.shape[0]:
-                other = other.T()
+            raise ValueError(f"cannot mul two incompatible matrices and vector")
         res: list = []
         if (isinstance(other, (Matrix, Vector))):
-            if type(other) == Vector and self.shape[1] != other.shape[0]:
-                other = other.T()
             try:
                 res = type(self)((self.shape[0], other.shape[1]))
                 for i in range(0, self.shape[0]):
@@ -123,11 +121,12 @@ class Matrix:
                         res.data[i][j] = self.data[i][j] * other
                 return res
             except:
-                raise ValueError("Error encountered")               
+                raise ValueError("Error encountered")
 
     def __rmul__(self, other):
         if (isinstance(other, (int, float))):
             return self * other
+        raise NotImplementedError(f"cannot mul a {type(other)} and a Matrix")
 
     def __str__(self) -> str:
         return str(self.data)
@@ -150,3 +149,8 @@ class Vector(Matrix):
         super().__init__(arg)
         if self.shape[0] != 1 and self.shape[1] != 1:
             raise ValueError(f"wrong dimensions for Vector")
+    
+    def dot(self, v):
+        if not isinstance(v, Vector):
+            raise ValueError("incompatible type")
+        
