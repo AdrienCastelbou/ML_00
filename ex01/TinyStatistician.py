@@ -32,7 +32,12 @@ class TinyStatistician:
         if l == 0 or not all(isinstance(elem, (int, float)) for elem in x):
             return None
         x.sort()
-        return None
+        r = (p/100) * (l - 1) + 1
+        ri = int(r)
+        rf = r - int(r)
+        if ri >= l:
+            return x[l - 1]
+        return x[ri - 1] + rf * (x[ri] - x[ri - 1])
     
     def var(self, x: Union[list, np.array]) -> float:
         l = len(x)
@@ -49,13 +54,3 @@ class TinyStatistician:
         if l == 0 or not all(isinstance(elem, (int, float)) for elem in x):
             return None
         return sqrt(self.var(x))
-
-a = [1, 42, 300, 10, 59]
-#print(TinyStatistician().mean(a))
-#print(TinyStatistician().median(a))
-#print(TinyStatistician().quartile(a))
-print(TinyStatistician().percentile(a, 10))
-#print(TinyStatistician().percentile(a, 15))
-#print(TinyStatistician().percentile(a, 20))
-#print(TinyStatistician().var(a))
-#print(TinyStatistician().std(a))
