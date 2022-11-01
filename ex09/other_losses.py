@@ -20,6 +20,11 @@ def mse_(y, y_hat):
 def rmse_(y, y_hat):
     return sqrt(mse_(y, y_hat))
      
+def mae_(y, y_hat):
+    return (1 / y.shape[0]) * np.sum(np.abs(y_hat - y))
+
+def r2score(y, y_hat):
+    return 1 - (np.sum((y_hat - y) ** 2) / np.sum((y - np.mean(y)) ** 2))
 
 def main_test():
     x = np.array([0, 15, -9, 7, 12, 3, -21])
@@ -28,6 +33,8 @@ def main_test():
     ## your implementation
     print(mse_(x,y))
     print(rmse_(x,y))
+    print(mae_(x,y))
+    print(r2score(x, y))
 
 
 if __name__ == "__main__":
