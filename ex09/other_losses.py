@@ -16,20 +16,10 @@ def mse_(y, y_hat):
     J = ((1 / y.shape[0])) * sum
     return J
 
-def rmse_elem_(y, y_hat):
-    J_elem = np.zeros(y.shape[0])
-    for i in range(0, y.shape[0]):
-        J_elem[i] = (y_hat[i] - y[i]) ** 2
-    return J_elem
 
 def rmse_(y, y_hat):
-    J_elem = mse_elem_(y, y_hat)
-    sum = 0
-    for elem in J_elem:
-        sum += elem
-    J = sqrt((1 / y.shape[0]) * sum)
-    return J
-    
+    return sqrt(mse_(y, y_hat))
+     
 
 def main_test():
     x = np.array([0, 15, -9, 7, 12, 3, -21])
