@@ -1,4 +1,3 @@
-from pyrsistent import v
 from matrix import Matrix, Vector
 
 
@@ -144,13 +143,21 @@ def matrix_mul_test():
         print(err)
 
 
+def vector_test():
+    #v1 = Vector([[1, 3, -5]])
+    #v2 = Vector([[4, -2, -1]])
+    #print(v1.dot(v2))
+    v1 = Vector([[3], [6], [2]])
+    v2 = Vector([[1, 3, 8]])
+    print(v1.dot(v2))
+
 def main():
     #matrix_creation_test()
     #matrix_addition_test()
     #matrix_substraction_test()
     #matrix_div_test()
-    matrix_mul_test()
-
+    #matrix_mul_test()
+    vector_test()
 
 if __name__ == "__main__":
     main()

@@ -153,4 +153,10 @@ class Vector(Matrix):
     def dot(self, v):
         if not isinstance(v, Vector):
             raise ValueError("incompatible type")
-        
+        if (self.shape != v.shape):
+            raise ValueError("Invalid dimensions")
+        sum = 0
+        for i in range(0, self.shape[0]):
+            for j in range(0, self.shape[1]):
+                sum += self.data[i][j] * v.data[i][j]
+        return sum
