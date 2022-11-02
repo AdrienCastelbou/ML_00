@@ -104,9 +104,6 @@ class Matrix:
             raise ValueError(f"cannot mul two incompatible matrices and vector")
         elif type(other) == Matrix and (self.shape[0] != other.shape[1] or self.shape[1] != other.shape[0]):
             raise ValueError(f"cannot mul two incompatible matrices")
-        if type(other) == Vector and self.shape[1] != other.shape[0]:
-            raise ValueError(f"cannot mul two incompatible matrices and vector")
-        res: list = []
         if (isinstance(other, (Matrix, Vector))):
             try:
                 res = type(self)((self.shape[0], other.shape[1]))
