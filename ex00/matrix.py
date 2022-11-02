@@ -1,7 +1,3 @@
-from operator import truediv
-from turtle import shape
-
-
 class Matrix:
     data= None
     shape = None
