@@ -18,6 +18,16 @@ def predict_(x, theta) -> np.array:
 
 
 def plot(x, y, theta):
+    if type(y) != np.ndarray or type(x) != np.ndarray or type(theta) != np.ndarray:
+        return None
+    if y.ndim == 1:
+        y = y.reshape(y.shape[0], -1)
+    if x.ndim == 1:
+        x = x.reshape(x.shape[0], -1)
+    if theta.ndim == 1:
+        theta = theta.reshape(theta.shape[0], -1)
+    if y.shape[1] != 1 or x.shape[1] != 1 or theta.shape != (2, 1):
+        return None
     try:
         if type(y) != np.ndarray or len(y) == 0:
             return
@@ -26,9 +36,6 @@ def plot(x, y, theta):
         if y.shape[1] != 1:
             return
         y_hat = predict_(x, theta)
-        if y_hat == None:
-            return 
-        print(y_hat)
         plt.scatter(x, y)
         plt.plot(x, y_hat, color="red")
         plt.show()

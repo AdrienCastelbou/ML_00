@@ -17,19 +17,41 @@ def predict_(x, theta) -> np.array:
 
 
 def loss_elem_(y, y_hat):
-    J_elem = np.zeros(y.shape[0])
-    for i in range(0, y.shape[0]):
-        J_elem[i] = (y_hat[i] - y[i]) ** 2
-    return J_elem
+    if type(y) != np.ndarray or type(y_hat) != np.ndarray:
+        return None
+    if y.ndim == 1:
+        y = y.reshape(y.shape[0], -1)
+    if y_hat.ndim == 1:
+        y_hat = y_hat.reshape(y_hat.shape[0], -1)
+    if y.shape[1] != 1 or y_hat.shape[1] != 1:
+        return None
+    try:
+        J_elem = np.zeros(y.shape[0])
+        for i in range(0, y.shape[0]):
+            J_elem[i] = (y_hat[i] - y[i]) ** 2
+        return J_elem
+    except:
+        return None
 
 
 def loss_(y, y_hat):
-    J_elem = loss_elem_(y, y_hat)
-    sum = 0
-    for elem in J_elem:
-        sum += elem
-    J = (1 / (2 * y.shape[0])) * sum
-    return J
+    if type(y) != np.ndarray or type(y_hat) != np.ndarray:
+        return None
+    if y.ndim == 1:
+        y = y.reshape(y.shape[0], -1)
+    if y_hat.ndim == 1:
+        y_hat = y_hat.reshape(y_hat.shape[0], -1)
+    if y.shape[1] != 1 or y_hat.shape[1] != 1:
+        return None
+    try:
+        J_elem = loss_elem_(y, y_hat)
+        sum = 0
+        for elem in J_elem:
+            sum += elem
+        J = (1 / (2 * y.shape[0])) * sum
+        return J
+    except:
+        return None
 
 
 def main_test():
