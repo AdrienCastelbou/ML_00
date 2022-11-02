@@ -1,23 +1,6 @@
 import numpy as np
 from math import sqrt
 
-def mse_elem_(y, y_hat):
-    if type(y) != np.ndarray or type(y_hat) != np.ndarray:
-        return None
-    if y.ndim == 1:
-        y = y.reshape(y.shape[0], -1)
-    if y_hat.ndim == 1:
-        y_hat = y_hat.reshape(y_hat.shape[0], -1)
-    if y.shape[1] != 1 or y_hat.shape[1] != 1:
-        return None
-    try:
-        J_elem = np.zeros(y.shape[0])
-        for i in range(0, y.shape[0]):
-            J_elem[i] = (y_hat[i] - y[i]) ** 2
-        return float(J_elem)
-    except:
-        return None
-
 
 def mse_(y, y_hat):
     if type(y) != np.ndarray or type(y_hat) != np.ndarray:
@@ -29,12 +12,7 @@ def mse_(y, y_hat):
     if y.shape[1] != 1 or y_hat.shape[1] != 1:
         return None
     try:
-        J_elem = mse_elem_(y, y_hat)
-        sum = 0
-        for elem in J_elem:
-            sum += elem
-        J = ((1 / y.shape[0])) * sum
-        return float(J)
+        return float(1 / (y.shape[0]) * (y_hat - y).T.dot(y_hat - y))
     except:
         return None
 
