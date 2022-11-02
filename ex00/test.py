@@ -147,8 +147,15 @@ def vector_test():
     #v1 = Vector([[1, 3, -5]])
     #v2 = Vector([[4, -2, -1]])
     #print(v1.dot(v2))
+    v1 = Vector([[1], [2], [3]])
+    v2 = Vector([[4], [5], [6]])
+    print(f"{v1} * {v2} =  {v1 * v2}")
+    return
     v1 = Vector([[3], [6], [2]])
     v2 = Vector([[1, 3, 8]])
+    matrix1 = Matrix([[7, 5], [1, 0], [4, 9]])
+    v1 = Vector([[1, 3, 0]])
+    print(f"{v1} * {matrix1} =  {v1 * matrix1}")
     print(v1.dot(v2))
 
 def main():

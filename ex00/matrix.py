@@ -1,3 +1,7 @@
+from operator import truediv
+from turtle import shape
+
+
 class Matrix:
     data= None
     shape = None
@@ -149,7 +153,46 @@ class Vector(Matrix):
         super().__init__(arg)
         if self.shape[0] != 1 and self.shape[1] != 1:
             raise ValueError(f"wrong dimensions for Vector")
+
     
+    def __mul__(self, other):
+        if not isinstance(other, (Matrix, Vector, int, float)):
+            raise NotImplementedError(f"cannot mul a {type(other)} and a Matrix")
+        elif type(other) == Vector and self.shape != other.shape:
+            raise ValueError(f"cannot mul two incompatible vectors")
+        elif type(other) == Matrix and self.shape[1] != other.shape[0]:
+            raise ValueError(f"cannot mul two incompatible matrices and vector")
+        if type(other) == Matrix:
+            try:
+                res = type(self)((self.shape[0], other.shape[1]))
+                for i in range(0, self.shape[0]):
+                    for j in range(0, other.shape[1]):
+                        for k in range(0, self.shape[1]):
+                            res.data[i][j] += self.data[i][k] * other.data[k][j]
+                return res
+            except:
+                raise ValueError("Error encountered")
+        elif type(other) == Vector:
+            try:
+                is_row = True if self.shape[0] == 1 else False
+                r_self = self if is_row else self.T()
+                r_other = other if is_row else other.T()
+                res = type(self)(r_self.shape)
+                for i in range(0, r_self.shape[1]):
+                    for j in range(0, r_self.shape[1]):
+                        if j != i:
+                            for k in range(0, r_self.shape[1]):
+                                if k != i:
+                                    if k > j:
+                                        res.data[0][i] += r_self.data[0][j]* r_other.data[0][k]
+                                    elif k < j:
+                                        res.data[0][i] -= r_self.data[0][j]* r_other.data[0][k]
+                return res if is_row else res.T()
+            except:
+                raise ValueError("Error encountered")
+        elif (isinstance(other, (int, float))):
+            return super().__mul__(other)
+
     def dot(self, v):
         if not isinstance(v, Vector):
             raise ValueError("incompatible type")
