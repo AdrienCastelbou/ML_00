@@ -160,13 +160,38 @@ def vector_test():
     print(f"{v1} * {matrix1} =  {v1 * matrix1}")
     return
 
-def main():
-    matrix_creation_test()
-    matrix_addition_test()
-    matrix_substraction_test()
-    matrix_div_test()
-    matrix_mul_test()
-    vector_test()
+def subject_test():
+    m1 = Matrix([[0.0, 1.0], [2.0, 3.0], [4.0, 5.0]])
+    print(m1.shape)
+    print(m1.T())
+    print(m1.T().shape)
+    m1 = Matrix([[0., 2., 4.], [1., 3., 5.]])
+    print(m1.shape)
+    print(m1.T())
+    print(m1.T().shape)
+    m1 = Matrix([[0.0, 1.0, 2.0, 3.0],
+    [0.0, 2.0, 4.0, 6.0]])
+    m2 = Matrix([[0.0, 1.0],
+    [2.0, 3.0],
+    [4.0, 5.0],
+    [6.0, 7.0]])
+    print(m1 * m2)
+    m1 = Matrix([[0.0, 1.0, 2.0],
+    [0.0, 2.0, 4.0]])
+    v1 = Vector([[1], [2], [3]])
+    print(m1 * v1)
+    v1 = Vector([[1], [2], [3]])
+    v2 = Vector([[2], [4], [8]])
+    print(v1 + v2)
 
+def main():
+    #matrix_creation_test()
+    #matrix_addition_test()
+    #matrix_substraction_test()
+    #matrix_div_test()
+    #matrix_mul_test()
+    #vector_test()
+    subject_test()
+    
 if __name__ == "__main__":
     main()
