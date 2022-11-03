@@ -5,6 +5,8 @@ def predict_(x, theta) -> np.array:
     try:
         if type(x) != np.ndarray or type(theta) != np.ndarray:
             return None
+        if theta.ndim == 1:
+            theta = theta.reshape(theta.shape[0], -1)
         if not len(x) or theta.shape != (2, 1):
             return None
         if x.ndim == 1:
@@ -15,7 +17,6 @@ def predict_(x, theta) -> np.array:
         return m.dot(theta)
     except:
         None
-
 
 def plot(x, y, theta):
     if type(y) != np.ndarray or type(x) != np.ndarray or type(theta) != np.ndarray:
