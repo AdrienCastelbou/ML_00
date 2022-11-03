@@ -5,7 +5,7 @@ from typing import Union
 class TinyStatistician:
     def mean(self, x: Union[list, np.array]) -> float:
         try:
-            l = float(len(x))
+            l = len(x)
             sum = 0.0
             for elem in x:
                 if not isinstance(elem, (float, int)):
@@ -16,13 +16,9 @@ class TinyStatistician:
             return None
 
 
-    def median(self, x: Union[list, np.array])  -> float:
+    def median(self, x: Union[list, np.array]) -> float:
         try:
-            l = len(x)
-            if l == 0 or not all(isinstance(elem, (int, float)) for elem in x):
-                return None
-            x.sort()
-            return x[int((l + 1) / 2) - 1]
+            return self.percentile(x, 50)
         except:
             return None
 
@@ -32,8 +28,9 @@ class TinyStatistician:
             l = len(x)
             if l == 0 or not all(isinstance(elem, (int, float)) for elem in x):
                 return None
-            x.sort()
-            return [float(x[int((l + 3)/ 4) - 1]), float(x[int((3 * l + 1) / 4) - 1])]
+            x = sorted(x)
+            print(x)
+            return [x[int(l / 4)], x[int(l * 3 / 4)]]
         except:
             return None
 
@@ -43,7 +40,7 @@ class TinyStatistician:
             l = len(x)
             if l == 0 or not all(isinstance(elem, (int, float)) for elem in x):
                 return None
-            x.sort()
+            x = sorted(x)
             r = (p/100) * (l - 1) + 1
             ri = int(r)
             rf = r - int(r)
