@@ -35,9 +35,9 @@ class TinyStatistician:
             l = len(x)
             if l == 0 or not all(isinstance(elem, (int, float)) for elem in x):
                 return None
-            x = sorted(x)
+            sorted_x = sorted(x)
             print(x)
-            return [float(x[int(l / 4)]), float(x[int(l * 3 / 4)])]
+            return [float(sorted_x[int(l / 4)]), float(sorted_x[int(l * 3 / 4)])]
         except:
             return None
 
