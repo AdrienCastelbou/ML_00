@@ -151,10 +151,10 @@ def vector_test():
     print(f"{v1} . {v2} = {v1.dot(v2)}")
     print("- Multiplications")
     v1 = Vector([[1], [2], [3]])
-    v2 = Vector([[4], [5], [6]])
+    v2 = Vector([[4, 5, 6]])
     print(f"{v1} * {v2} =  {v1 * v2}")
     m1 = Matrix([[1, 2, 3]])
-    print(f"{v1} * {v2} =  {v1 * v2}")
+    print(f"{m1} * {v2} =  {m1 * v2}")
     matrix1 = Matrix([[7, 5], [1, 0], [4, 9]])
     v1 = Vector([[1, 3, 0]])
     print(f"{v1} * {matrix1} =  {v1 * matrix1}")
@@ -183,6 +183,8 @@ def subject_test():
     v1 = Vector([[1], [2], [3]])
     v2 = Vector([[2], [4], [8]])
     print(v1 + v2)
+
+import numpy as np
 
 def main():
     #matrix_creation_test()
