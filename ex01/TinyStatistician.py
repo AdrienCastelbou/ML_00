@@ -6,12 +6,12 @@ class TinyStatistician:
     def mean(self, x: Union[list, np.array]) -> float:
         try:
             l = len(x)
-            sum = 0.0
+            res = 0.0
             for elem in x:
                 if not isinstance(elem, (float, int)):
                     return None
-                sum += elem
-            return sum / l
+                res += elem
+            return res / l
         except:
             return None
 
@@ -58,10 +58,10 @@ class TinyStatistician:
             if l == 0 or not all(isinstance(elem, (int, float)) for elem in x):
                 return None
             mean = self.mean(x)
-            sum = 0
+            res = 0
             for elem in x:
-                sum += (elem - mean) * (elem - mean)
-            return sum / (l  - 1)
+                res += (elem - mean) * (elem - mean)
+            return res / (l  - 1)
         except:
             return None
 
